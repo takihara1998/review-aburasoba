@@ -7,5 +7,7 @@ class User < ApplicationRecord
   # validates :picture　???
   validates :introduction, length: { maximum: 255 }
   has_secure_password
+  
+  has_many :shops
 
 end
