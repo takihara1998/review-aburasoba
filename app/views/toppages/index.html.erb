@@ -1,0 +1,5 @@
+<% if logged_in? %>
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+<% else %>
+  <p>ログアウト中</p>
+<% end %>
