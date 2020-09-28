@@ -5,6 +5,12 @@ class ShopsController < ApplicationController
     @shops = Shop.order(id: :desc).page(params[:page])
   end
   
+  def show
+    @shop = Shop.find(params[:id])
+    @reviews = @shop.reviews
+    @review = Review.new
+  end
+  
   def new
     @shop = current_user.shops.build  #form_with
   end
@@ -13,9 +19,8 @@ class ShopsController < ApplicationController
     @shop = current_user.shops.build(shop_params)
     if @shop.save
       flash[:success] = 'メッセージを投稿しました。'
-      redirect_to shops_url
+      redirect_to @shop
     else
-      # @shops = current_user.shops.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
       render :new
     end

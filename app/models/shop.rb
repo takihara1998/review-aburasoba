@@ -8,5 +8,6 @@ class Shop < ApplicationRecord
   validates :holiday, length: { maximum: 50 }
   validates :tel, length: { maximum: 50 }
 
+  has_many :reviews, dependent: :destroy
 
 end

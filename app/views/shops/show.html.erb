@@ -1,0 +1,33 @@
+<h2>店舗詳細</h2>
+<p>店名：<%= @shop.name %></p>
+
+<h4>レビュー追加</h4>
+<%= form_with(model: [@shop, @review], local: true) do |f| %>
+
+  <%= f.label :title, 'タイトル' %>
+  <%= f.text_field :title %></br>
+  
+  <%= f.label :content, 'レビュー内容' %>
+  <%= f.text_area :content %></br>
+  
+  <%= f.label :picture_a, '写真' %>
+  <%= f.text_field :picture_a %></br>
+  
+  <%= f.label :picture_b, '写真' %>
+  <%= f.text_field :picture_b %></br>
+  
+  <%= f.label :star, '評価' %>
+  <%= f.number_field :star %></br>
+  
+  <%= f.submit "レビューする" %>
+<% end %>
+
+<h4>レビュー一覧</h4>
+<% @shop.reviews.each do |review| %>
+  <%= link_to review.user.name, @shop.user %>
+  <p>タイトル：<%= review.title %></p>
+  <p>レビュー内容：<%= review.content %></p>
+  <p>写真：<%= review.picture_a %></p>
+  <p>写真：<%= review.picture_b %></p>
+  <p>評価：<%= review.star %></p>
+<% end %>
