@@ -9,5 +9,8 @@ class Shop < ApplicationRecord
   validates :tel, length: { maximum: 50 }
 
   has_many :reviews, dependent: :destroy
+  
+  has_many :shop_likes, dependent: :destroy
+  has_many :users, through: :shop_likes
 
 end

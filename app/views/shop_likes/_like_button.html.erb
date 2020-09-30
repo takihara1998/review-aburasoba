@@ -1,0 +1,11 @@
+<% if current_user.liking?(shop) %>
+  <%= form_with(model: current_user.shop_likes.find_by(shop_id: shop.id), local: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :shop_id, shop.id %>
+    <%= f.submit 'Unlike', class: 'btn btn-danger btn-block' %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.shop_likes.build, local: true) do |f| %>
+    <%= hidden_field_tag :shop_id, shop.id %>
+    <%= f.submit 'Like', class: 'btn btn-primary btn-block' %>
+  <% end %>
+<% end %>

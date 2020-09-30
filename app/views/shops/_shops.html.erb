@@ -1,0 +1,16 @@
+<ul class="list-unstyled">
+  <% shops.each do |shop| %>
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          <%= link_to shop.user.name, user_path(shop.user) %> <span class="text-muted">posted at <%= shop.created_at %></span>
+        </div>
+        <div>
+          <p>店名：<%= shop.name %></p>
+          <p>住所：<%= shop.address %></p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate shops %>
+</ul>

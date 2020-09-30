@@ -1,0 +1,4 @@
+<ul class="nav nav-tabs nav-justified mb-3">
+  <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">Likes  <span class="badge badge-secondary"><%= @count_shop_likes %></span></a></li>
+</ul>
+<%= render 'shops/shops', shops: @likes %>

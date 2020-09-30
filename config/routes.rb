@@ -6,11 +6,16 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
-  resources :users, only: [:show, :create, :edit, :update, :destroy]
+  resources :users, only: [:show, :create, :edit, :update, :destroy] do
+    member do
+      get :likes
+    end
+  end
   
   resources :shops, only: [:index, :new, :show, :create, :edit, :update] do
     resources :reviews, only: [:new, :show, :create, :edit, :update, :destroy]
   end
-
+  
+  resources :shop_likes, only: [:create, :destroy]
   
 end
