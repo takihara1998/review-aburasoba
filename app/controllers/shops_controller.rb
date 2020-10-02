@@ -26,6 +26,7 @@ class ShopsController < ApplicationController
     end
   end
 
+
   private
 
     def shop_params

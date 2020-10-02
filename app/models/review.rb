@@ -7,5 +7,8 @@ class Review < ApplicationRecord
   # validates :picture_a  ???
   # validates :picture_b  ???
   validates :star, presence: true
+  
+  has_many :review_likes, dependent: :destroy
+  has_many :users, through: :review_likes
 
 end

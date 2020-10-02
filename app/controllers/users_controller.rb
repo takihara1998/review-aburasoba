@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+  
   private
 
     def user_params

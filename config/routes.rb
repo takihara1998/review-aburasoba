@@ -12,10 +12,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :shops, only: [:index, :new, :show, :create, :edit, :update] do
+  resources :shops, only: [:index, :new, :show, :create, :edit, :update], shallow: true do
     resources :reviews, only: [:new, :show, :create, :edit, :update, :destroy]
   end
   
   resources :shop_likes, only: [:create, :destroy]
+  resources :review_likes, only: [:create, :destroy]
   
 end

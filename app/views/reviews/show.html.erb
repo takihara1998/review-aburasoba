@@ -1,0 +1,8 @@
+<h3>レビュー詳細</h3>
+<p>タイトル：<%= @review.title %></p>
+<p>レビュー内容：<%= @review.content %></p>
+<p>写真：<%= @review.picture_a %></p>
+<p>写真：<%= @review.picture_b %></p>
+<p>評価：<%= @review.star %></p>
+<%= render 'review_likes/good_button', review: @review %>
+<!--<span class="badge badge-secondary"><%= @count_review_goods %></span>  -->

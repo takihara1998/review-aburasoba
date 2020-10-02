@@ -31,4 +31,6 @@
   <p>写真：<%= review.picture_a %></p>
   <p>写真：<%= review.picture_b %></p>
   <p>評価：<%= review.star %></p>
+  <%= link_to "詳細へ", review %><br/>
+  <!--<%= render 'review_likes/good_button', review: @review %>--> <!-- エラー -->
 <% end %>
