@@ -19,9 +19,7 @@
       <% if shop.shop_picture? %>
         <%= link_to (image_tag shop.shop_picture.url, :width => "125", :height => "125"), shop %>
       <% else %>
-        <%= link_to shop do %>
-          <img src="<%= asset_path "default.png" %>">
-        <% end %>
+        <%= link_to (image_tag "default.png", :width => "125", :height => "125"), shop %>
       <% end %>
       <p class="tp_popular_shops_name"><%= link_to shop.name, shop %></p>
       <p>住所：<%= shop.address %></p>
@@ -53,11 +51,7 @@
       <% if review.shop.shop_picture? %>
         <p class="text-center"><%= link_to (image_tag review.shop.shop_picture.url, :width => "150", :height => "150"), review.shop %></p>  <!--要注意-->
       <% else %>
-        <p class="text-center">
-          <%= link_to review.shop do %>
-            <img src="<%= asset_path "default.png" %>">
-          <% end %>
-        </p>   <!--初期画像-->
+        <p class="text-center"><%= link_to (image_tag "default.png", :width => "150", :height => "150"), review.shop %></p>   <!--初期画像-->
       <% end %>
       <p class="tp_review_shop_name mt-3 text-center"><%= link_to review.shop.name, review.shop %></p>
     </aside>
@@ -65,9 +59,7 @@
       <% if review.user.picture? %>
         <%= link_to (image_tag review.user.picture.url, :width => "45", :height => "45"), review.user %>
       <% else %>
-        <%= link_to review.user do %>
-          <img src="<%= asset_path "default_user.png" %>">
-        <% end %><!--初期画像-->
+        <%= link_to (image_tag "default_user.png", :width => "45", :height => "45"), review.user %><!--初期画像-->
       <% end %>
       <span class="tp_review_user_name ml-3"><%= link_to review.user.name, review.user %></span>
       <!--星評価-->
