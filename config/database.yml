@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: review-aburasoba_production
   username: review-aburasoba
   password: <%= ENV['REVIEW-ABURASOBA_DATABASE_PASSWORD'] %>
