@@ -12,10 +12,10 @@
 .toppage-image {
   width: 100%;
   height: 0;
-    /* 表示画像の高さ ÷ 表示画像の幅 × 100 */
-    padding-top: 75%;
-    background: url('toppage1.jpg') 0 0 no-repeat;
-    background-size: cover;
+  /* 表示画像の高さ ÷ 表示画像の幅 × 100 */
+  padding-top: 75%;
+  background: url('toppage1.jpg');
+  background-size: cover;
 }
 
 
@@ -53,10 +53,6 @@
 .tp_review_content {
   font-size: 18px;
 }
-
-// .tp_review_user_picture {
-  
-// }
 
 
 // トップページ含むすべてのグッドボタン
