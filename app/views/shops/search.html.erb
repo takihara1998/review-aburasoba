@@ -1,0 +1,43 @@
+<h3 class="mb-4">お店を検索する</h3>
+<%= render "search_form"%>  <!--検索フォームをrender-->
+<p class="mt-2 mb-5">レビューを書きたいお店を検索してください。</p>
+
+<%= link_to "お店を追加する", new_shop_path, class: "btn btn-primary" %>
+<p class="text-muted mb-5 mt-1">※レビューを追加したいお店が登録されていない場合は、登録をお願いします。</p>
+
+
+<h4 class="pt-5 mb-4">検索結果</h4>
+<div class="row">
+  <% if @search_shops %>
+    <% @search_shops.each do |shop| %>
+      <aside class="col-sm-4">
+        <% if shop.shop_picture? %>
+          <p class="mb-5 text-center"><%= link_to (image_tag shop.shop_picture.url, :width => "150", :height => "150"), shop %></p>
+        <% else %>
+          <p class="mb-5 text-center"><%= link_to (image_tag "default.png", :width => "150", :height => "150"), shop %></p>
+        <% end %>
+      </aside>
+      <div class="col-sm-8">
+        <span class="mr-5 mb-5" style="font-size: 23px;"><%= link_to shop.name, shop %></span>
+        <!--星評価-->
+        <span id="star-rate-<%= shop.id %>"></span>
+        <script>
+        $('#star-rate-<%= shop.id %>').raty({
+          size: 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= shop.reviews.average(:star).to_f %>,
+        });
+        </script>  
+        <span>（<%= shop.reviews.average(:star).to_f.round(2) %>）</span>
+        <!--/星評価-->
+        <div class="mt-5 mb-4" style="font-size: 16px;"><%= shop.address %></div>
+        <span class="mr-5" style="font-size: 16px;">営業時間：<%= shop.open_hour %></span>
+        <span  style="font-size: 16px;">定休日：<%= shop.holiday %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>

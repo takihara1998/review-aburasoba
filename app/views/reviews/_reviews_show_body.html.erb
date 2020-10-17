@@ -1,0 +1,61 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-sm-10">
+    <div class="mb-5">
+      <% if @review.user.picture? %>
+        <span><%= link_to (image_tag @review.user.picture.url, :width => "80", :height => "80"), @review.user %></span>
+      <% else %>
+        <span><%= link_to (image_tag "default_user.png", :width => "80", :height => "80"), @review.user %></span>   <!--初期画像-->
+      <% end %>  
+      <span class="ml-5" style="font-size: 18px;">レビューした人：<%= link_to @review.user.name, @review.user %></span>
+    
+      <!--星評価-->
+       <span class="ml-5" id="star-rate-<%= @review.id %>"></span>
+        <script>
+        $('#star-rate-<%= @review.id %>').raty({
+          size: 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @review.star %>,
+        });
+        </script><br/>
+      <!--/星評価-->
+    </div>
+    
+    <% if @review.updated_at != @review.created_at %>
+      <p class="text-right"><%= @review.created_at.to_s(:datetime_jp) %></p>
+      <p class="updated_at"><%= @review.updated_at.to_s(:datetime_jp) %><span class="text-muted">(編集)</span></p>
+    <% else %>
+      <p class="created_at"><%= @review.created_at.to_s(:datetime_jp) %></p>
+    <% end %>
+    <p class="rs_review_title"><%= @review.title %></p>
+    <p class="rs_review_content mt-5"><%= @review.content %></p>
+    <div class="mt-5">
+      <% if @review.picture_a? %>
+        <p class="rs_review_picture_a"><%= image_tag @review.picture_a.url, :width => "150", :height => "150" %></p>
+      <% end %>
+      <% if @review.picture_b? %>
+        <%= image_tag @review.picture_b.url, :width => "150", :height => "150" %>
+      <% end %>
+    </div>
+    <% if logged_in? %>
+      <% if current_user.id == @review.user_id %>
+        <div class="text-right", style="font-size: 16px;">
+          <%= link_to "編集", edit_review_path(@review) %> 
+          <%= link_to "削除", @review, method: :delete, data: { confirm: "削除しますか？" } %>  <!--本当に消すのか確認する-->
+        </div>
+        <!--自分のレビューに対してはグッドボタン無効-->
+        <p class="mt-2" style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= @review.review_likes.count %><p>
+      <% else %>
+        <p class="mt-2"><%= render 'review_likes/good_button', review: @review %></p>
+      <% end %>
+    <% else %>
+      <%= link_to login_path do %>
+        <span style="color: black;"><i class="far fa-thumbs-up mt-3 mb-1"></i> <%= @review.review_likes.count %><span>
+      <% end %>
+      <p class="text-muted">※役立ったボタンを押すにはログインが必要です</p>
+    <% end %>
+  </div>
+</div>

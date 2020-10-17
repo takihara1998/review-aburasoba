@@ -1,0 +1,68 @@
+<!--ページ上部-->
+<div class="row">
+  <aside class="col-sm-4 text-center">
+    <% if @shop.shop_picture? %>
+      <%= image_tag @shop.shop_picture.url, :width => "150", :height => "150" %>
+    <% else %>
+      <%= image_tag "default.png", :width => "150", :height => "150" %>
+    <% end %>
+  </aside>
+  <div class="col-sm-8">
+    <span class="ss_shop_name"><%= @shop.name %></span>
+    <!--星評価-->
+    <%= render "reviews/shop_star" %>
+    <!--/星評価-->
+    <p class="ss_shop_address"><%= @shop.address %></p>
+    <span class="ss_shop_open_hour">営業時間：<%= @shop.open_hour %></span>
+    <span class="ss_shop_holiday">定休日：<%= @shop.holiday %></span>
+    <p class="ss_shop_tel">📞：<%= @shop.tel %></p>
+    <% if logged_in? %>
+      <%= render 'shop_likes/like_button', shop: @shop %>
+      <%= link_to "店舗情報編集", edit_shop_path(@shop), class: 'btn btn-primary mt-3' %>
+    <% else %>
+      <%= link_to login_path do %> 
+        <span style="color: red;"><i class="far fa-heart"></i> <%= @shop.shop_likes.count %></span><br/>
+      <% end %>
+      <div class="mb-3">
+        <%= link_to "店舗情報編集", login_path, class: 'btn btn-primary mt-3' %>
+      </div>
+      <span class="text-muted">※ボタンの操作にはログインが必要です</span>
+    <% end %> 
+  </div>
+</div><hr/>
+
+<!--レビューフォーム部分-->
+<h3 class="mt-4">このお店のレビューを書く</h3>
+<%= form_with(model: [@shop, @review], local: true) do |f| %>
+  <div class="row">
+    <div class="form-group col-sm-6 mt-3">
+      <%= f.label :title, 'タイトル' %>
+      <%= f.text_field :title, class: "form-control " %>
+    </div>
+    <div id="star" class="form-group col-sm-6 mt-3">
+      <%= f.label :star, '評価' %>
+      <%= f.hidden_field :star, id: :review_star %></br>
+    </div>
+  </div>
+  
+  <!-- 評価javascript -->
+  <%= render "reviews/add_star" %>
+  
+  <div class="form-group mt-3">
+    <%= f.label :content, 'レビュー内容' %>
+    <%= f.text_area :content, class: "form-control" %></br>
+  </div>
+  
+  <%= f.label :picture_a, '写真' %>
+  <%= f.file_field :picture_a, class: "mb-3" %>
+  <%= f.file_field :picture_b %></br>
+  
+  <% if logged_in? %>
+    <p class="text-center"><%= f.submit "レビューする", class: " btn btn-primary mb-4" %></p>
+  <% else %>
+    <div class="text-center">
+      <p><%= link_to "レビューする", login_path, class: 'btn btn-primary' %></p> 
+      <p class="text-muted">※レビューするにはログインが必要です</p>
+    </div>  
+  <% end %>
+<% end %>

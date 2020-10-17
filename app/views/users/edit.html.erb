@@ -1,0 +1,47 @@
+<div class="row">
+  <aside class="col-sm-3">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= @user.name %></h3>
+      </div>
+      <div class="card-body">
+        <% if @user.picture? %>
+          <%= link_to (image_tag @user.picture.url, :width => "100%", :height => "100%"), @user %>
+        <% else %>
+          <%= link_to (image_tag "default_user.png", :width => "100%", :height => "100%"), @user %>
+        <% end %>
+      </div>
+    </div>
+    <% if logged_in? %>
+      <table class="table table-bordered mt-5">
+        <tr><th>メニュー</th></tr>
+        <tr><td><%= link_to "ホーム", root_path %></td></tr>
+        <tr><td><%= link_to "マイページ", user_path(@user) %></td></tr>
+        <tr><td><%= link_to "プロフィール編集", edit_user_path(@user) %></td></tr>
+      </table>
+    <% end %>
+  </aside>
+  <div class="col-sm-9">
+    <h3>プロフィール編集</h3><hr/>
+    
+    <%= form_with(model: @user, local: true) do |f| %>
+    
+      <div class="form-group mb-5 col">
+        <%= f.label :name, 'お名前（ニックネーム）' %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      
+      <div class="form-group mb-5 col">
+        <%= f.label :introduction, 'プロフィール文（0~255文字）' %>
+        <%= f.text_area :introduction, class: "form-control" %>
+      </div>
+      
+      <div class="form-group mb-5 col">
+        <%= f.label :picture, 'プロフィール写真' %>
+        <%= f.file_field :picture %>
+      </div>
+      
+      <p class="text-center"><%= f.submit "編集完了", class: "btn btn-primary" %></p>
+    <% end %>
+  </div>
+</div>

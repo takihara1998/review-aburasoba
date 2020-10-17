@@ -1,0 +1,29 @@
+<div class="row">
+  <aside class="col-sm-4 text-center">
+    <% if @review.shop.shop_picture? %>
+      <%= link_to (image_tag @review.shop.shop_picture.url, :width => "150", :height => "150"), @review.shop %> 
+    <% else %>
+      <%= link_to (image_tag "default.png", :width => "150", :height => "150"), @review.shop %>
+    <% end %>
+  </aside>
+  <div class="col-sm-8">
+    <span class="rs_shop_name"><%= link_to @review.shop.name, @review.shop %></span>
+
+    <!--星評価-->
+    <%= render "shop_star" %>  
+
+    <p class="rs_shop_address"><%= @review.shop.address %></p>
+    <% if logged_in? %>
+      <%= render 'shop_likes/like_button', shop: @review.shop %>
+      <%= link_to "このお店のレビューを書く", @review.shop, class: 'btn btn-info mt-3 mr-5' %>
+      <%= link_to "店舗情報編集", edit_shop_path(@review.shop), class: 'btn btn-primary mt-3 ml-5' %>
+    <% else %>
+      <%= link_to login_path do %> 
+        <span style="color: red;"><i class="far fa-heart"></i> <%= @review.shop.shop_likes.count %></span><br/>
+      <% end %>
+      <%= link_to "このお店のレビューを書く", login_path, class: 'btn btn-info mt-3 mr-5 mb-3' %> 
+      <%= link_to "店舗情報編集", login_path, class: 'btn btn-primary mt-3 ml-5 mb-3' %><br/> 
+      <span class="text-muted">※ボタンの操作にはログインが必要です</span>
+    <% end %>
+  </div>
+</div>

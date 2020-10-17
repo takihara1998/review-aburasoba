@@ -1,0 +1,15 @@
+<!--星評価-->
+<span id="star-rate-<%= @shop.id %>"></span>
+<script>
+$('#star-rate-<%= @shop.id %>').raty({
+  size: 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  half: true,
+  readOnly: true,
+  score: <%= @shop.reviews.average(:star).to_f %>,
+});
+</script>  
+<span>（<%= @shop.reviews.average(:star).to_f.round(2) %>）</span>
+<!--/星評価-->

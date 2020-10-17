@@ -11,4 +11,7 @@ class Review < ApplicationRecord
   has_many :review_likes, dependent: :destroy
   has_many :users, through: :review_likes
 
+  mount_uploader :picture_a, PictureAUploader
+  mount_uploader :picture_b, PictureBUploader
+  
 end

@@ -1,0 +1,41 @@
+<!--お店の一覧ページのパーシャル-->
+<% shops.each do |shop| %>
+  <aside class="col-sm-4 text-center mb-5">
+    <% if shop.shop_picture? %>
+      <%= link_to (image_tag shop.shop_picture.url, :width => "150", :height => "150"), shop %>
+    <% else %>
+      <%= link_to (image_tag "default.png", :width => "150", :height => "150"), shop %>
+    <% end %>
+  </aside>
+  <div class="col-sm-8 mb-5">
+    <span class="mr-5", style="font-size: 20px;"><%= link_to shop.name, shop %></span>
+    <!--星評価(shop_star)-->
+   <span id="star-rate-<%= shop.id %>"></span>
+    <script>
+    $('#star-rate-<%= shop.id %>').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+      score: <%= shop.reviews.average(:star).to_f %>,
+    });
+    </script>
+    <span>（<%= shop.reviews.average(:star).to_f.round(2) %>）</span>
+      <!--/星評価-->
+    <p class="mt-4", style="font-size: 17px;"><%= shop.address %></p>
+    <span class="mr-5" style="font-size: 17px;">営業時間：<%= shop.open_hour %></span>
+    <span style="font-size: 17px;">定休日：<%= shop.holiday %></span>
+    <div class="mt-5">
+      <% if logged_in? %>
+        <%= render 'shop_likes/like_button', shop: shop %>
+      <% else %>
+        <%= link_to login_path do %>
+          <span style="color: red;"><i class="far fa-heart"></i> <%= shop.shop_likes.count %></span><br/>
+        <% end %>
+        <p class="text-muted mt-2">※いいねするにはログインが必要です</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

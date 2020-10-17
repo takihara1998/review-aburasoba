@@ -1,30 +1,30 @@
-<h2>お店の追加フォーム</h2>
-<% if logged_in? %>  
-  <%= form_with(model: @shop, local: true) do |f| %>
-    <div class="form-group">
-      <%= f.label :name, "店名" %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :picture, "写真" %>
-      <%= f.text_field :picture, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :address, "住所" %>
-      <%= f.text_field :address, class: 'form-control', :placeholder =>"例：東京都新宿区新宿1-1-1" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :open_hour, "営業時間" %>
-      <%= f.text_field :open_hour, class: 'form-control', :placeholder => "例：10:00~25:00" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :holiday, "定休日" %>
-      <%= f.text_field :holiday, class: 'form-control', :placeholder => "例：水曜日" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :tel, "電話番号" %>
-      <%= f.text_field :tel, class: 'form-control', :placeholder => "例：080-1234-5678" %>
-    </div>
-    <%= f.submit '追加', class: 'btn btn-primary btn-block' %>
-  <% end %>
+<h2 class="mb-4">お店の追加フォーム</h2>
+<%= form_with(model: @shop, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "店名" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address, class: 'form-control', placeholder: "例：東京都新宿区新宿1-1-1" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :open_hour, "営業時間" %>
+    <%= f.text_field :open_hour, class: 'form-control', placeholder: "例：10:00~25:00" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :holiday, "定休日" %>
+    <%= f.text_field :holiday, class: 'form-control', placeholder: "例：水曜日" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tel, "電話番号" %>
+    <%= f.text_field :tel, class: 'form-control', placeholder: "例：080-1234-5678" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :shop_picture, "写真" %>
+    <%= f.file_field :shop_picture %>
+  </div>
+  <div class="form-group text-center mt-5">
+    <%= f.submit '追加する', class: 'btn btn-primary' %>
+  </div>
 <% end %>

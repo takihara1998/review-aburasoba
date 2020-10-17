@@ -1,0 +1,61 @@
+<!--users/:idのパーシャル-->
+<div class="row">
+  <% reviews.each do |review| %>
+  <aside class="col-sm-4 mt-4 mb-4 text-center">
+    <% if review.shop.shop_picture? %>
+      <%= link_to (image_tag review.shop.shop_picture.url, :width => "125", :height => "125"), review.shop %> <!--要検討-->
+    <% else %>
+      <%= link_to (image_tag "default.png", :width => "125", :height => "125"), review.shop %>
+    <% end %>
+    <p class="rh_shop_name"><%= link_to review.shop.name, review.shop %></p>
+  </aside>
+  <div class="col-sm-8 mt-4 mb-4">
+    <!--星評価-->
+   <span id="star-rate-<%= review.id %>"></span>
+    <script>
+    $('#star-rate-<%= review.id %>').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+      score: <%= review.star %>,
+    });
+    </script>  
+  <!--/星評価-->
+    <% if review.updated_at != review.created_at %>
+      <p class="text-right"><%= review.created_at.to_s(:datetime_jp) %></p>
+      <p class="updated_at"><%= review.updated_at.to_s(:datetime_jp) %><span class="text-muted">(編集)</span></p>
+    <% else %>
+      <p class="created_at"><%= review.created_at.to_s(:datetime_jp) %></p>
+    <% end %>
+    <p class="rh_review_title" style="text-decoration:underline;"><%= link_to review.title, review%></p>
+    <div class="review-content rh_review_content">
+      <p><%= review.content %><p>
+    </div>
+    <% if review.picture_a? %>
+      <%= image_tag review.picture_a.url, :width => "100", :height => "100" %>
+    <% end %>
+    <% if review.picture_b? %>
+      <%= image_tag review.picture_b.url, :width => "100", :height => "100" %>
+    <% end %>
+    
+    <% if logged_in? %>
+      <% if current_user.id == review.user_id %>
+        <!--自分のレビューに対してはグッドボタン無効-->
+        <p class="mt-2" style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= review.review_likes.count %><p>
+      <% else %>
+        <p class="mt-2"><%= render "review_likes/good_button", review: review %></p>
+      <% end %>
+    <% else %>
+      <%= link_to login_path do %> 
+        <span style="color: black;"><i class="far fa-thumbs-up mt-3 mb-1"></i> <%= review.review_likes.count %></span><br/>
+      <% end %>
+      <span class="text-muted">※グッドボタンを押すにはログインが必要です</span>
+    <% end %>
+    
+    <p class="text-right"><%= link_to "レビュー詳細へ", review %></p>
+  </div>
+  <% end %>
+</div>

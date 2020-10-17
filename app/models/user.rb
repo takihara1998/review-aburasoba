@@ -16,6 +16,8 @@ class User < ApplicationRecord
   
   has_many :review_likes, dependent: :destroy
   has_many :goods, through: :review_likes, source: :review
+  
+  mount_uploader :picture, PictureUploader
 
   def like(shop)
     self.shop_likes.find_or_create_by(shop_id: shop.id)

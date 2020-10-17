@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
   
   resources :shops, only: [:index, :new, :show, :create, :edit, :update], shallow: true do
+    collection do
+      get :search
+      get :created_at
+    end
     resources :reviews, only: [:new, :show, :create, :edit, :update, :destroy]
   end
   

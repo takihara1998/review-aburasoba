@@ -1,5 +1,113 @@
-<% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
-<% else %>
-  <p>ログアウト中</p>
-<% end %>
+<!--トップページ上部（写真・紹介文）-->
+<div class="toppage-top">
+  <div class="toppage-image"><img src="<%= asset_path "toppage1.jpg" %>"></div>
+  <p class="toppage-sentence">油そばのレビューサイトです。</p>
+</div>
+
+<h3 class="text-center mb-5">油そばのレビューサイトです。</h3>  <!--簡単なサービス紹介-->
+<!--トップページ上部終わり-->
+
+<!--検索フォームをrender-->
+<h4>お店を探す</h4>
+<%= render "shops/search_form"%>
+
+<!--人気店４つ-->
+<h3 class="mt-5 mb-5">人気のお店</h3> <!--テーブルにしよう-->
+<div class="row">
+  <% @star_shops.each do |shop| %>
+    <div class="col-sm-3 text-center">
+      <% if shop.shop_picture? %>
+        <%= link_to (image_tag shop.shop_picture.url, :width => "125", :height => "125"), shop %>
+      <% else %>
+        <%= link_to (image_tag "default.png", :width => "125", :height => "125"), shop %>
+      <% end %>
+      <p class="tp_popular_shops_name"><%= link_to shop.name, shop %></p>
+      <p>住所：<%= shop.address %></p>
+      <!--星評価-->
+      <div id="star-rate-<%= shop.id %>"></div>
+      <script>
+      $('#star-rate-<%= shop.id %>').raty({
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half: true,
+        readOnly: true,
+        score: <%= shop.reviews.average(:star).to_f %>,
+      });
+      </script>  
+      <p>（<%= shop.reviews.average(:star).to_f.round(2) %>）</p>
+      <!--/星評価-->
+    </div>
+  <% end %>
+</div>
+<p class="text-right"><%= link_to ">>人気のお店一覧へ", shops_path %></p>
+
+<!--最新レビュー５つ-->
+<h3 class="mb-5">最近のレビュー</h3><hr/>
+<div class="row">
+  <% @reviews.each do |review| %>
+    <aside class="col-sm-4 mb-5">
+      <% if review.shop.shop_picture? %>
+        <p class="text-center"><%= link_to (image_tag review.shop.shop_picture.url, :width => "150", :height => "150"), review.shop %></p>  <!--要注意-->
+      <% else %>
+        <p class="text-center"><%= link_to (image_tag "default.png", :width => "150", :height => "150"), review.shop %></p>   <!--初期画像-->
+      <% end %>
+      <p class="tp_review_shop_name mt-3 text-center"><%= link_to review.shop.name, review.shop %></p>
+    </aside>
+    <div class="col-sm-7 mb-5">
+      <% if review.user.picture? %>
+        <%= link_to (image_tag review.user.picture.url, :width => "45", :height => "45"), review.user %>
+      <% else %>
+        <%= link_to (image_tag "default_user.png", :width => "45", :height => "45"), review.user %><!--初期画像-->
+      <% end %>
+      <span class="tp_review_user_name ml-3"><%= link_to review.user.name, review.user %></span>
+      <!--星評価-->
+       <span id="star-rate-<%= review.id %>", class="ml-5"></span>
+        <script>
+        $('#star-rate-<%= review.id %>').raty({
+          size: 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= review.star %>,
+        });
+        </script>  
+      <!--/星評価-->
+      <% if review.updated_at != review.created_at %>
+        <p class="text-right"><%= review.created_at.to_s(:datetime_jp) %></p>
+        <p class="updated_at"><%= review.updated_at.to_s(:datetime_jp) %><span class="text-muted">(編集)</span></p>
+      <% else %>
+        <p class="created_at"><%= review.created_at.to_s(:datetime_jp) %></p>
+      <% end %>
+      <div class="tp_review_title mt-3"><%= link_to review.title, review %></div>
+      <div class="review-content tp_review_content mt-3">
+        <p><%= review.content %></p>
+      </div>
+      <div class="mt-3">
+        <% if review.picture_a? %>
+          <%= image_tag review.picture_a.url, :width => "100", :height => "100" %><br/>  <!--もっとみるの中に入れるからいらないかもしれない-->
+        <% end %>
+        <% if review.picture_b? %>
+          <%= image_tag review.picture_b.url, :width => "100", :height => "100" %><br/>  <!--最初から剥き出しになることはなさそう-->
+        <% end %>
+      </div>
+      <% if logged_in? %>
+        <% if current_user.id == review.user_id %>
+          <!--自分のレビューに対してはグッドボタン無効-->
+          <p style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= review.review_likes.count %><p>
+        <% else %>
+          <p class="mt-4"><%= render "review_likes/good_button", review: review %></p>
+        <% end %>
+      <% else %>
+        <%= link_to login_path do %> 
+          <span style="color: black;"><i class="far fa-thumbs-up mt-3 mb-1"></i> <%= review.review_likes.count %></span><br/>
+        <% end %>
+        <span class="text-muted">※グッドボタンを押すにはログインが必要です</span>
+      <% end %>
+      <p class="text-right"><%= link_to "レビュー詳細へ", review %></p>
+    </div>
+  <% end %>
+</div>

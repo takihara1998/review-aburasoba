@@ -1,0 +1,7 @@
+<h2 class="mb-4">最近追加されたお店</h2>
+<%= render "change_index" %>
+
+<div class="row">
+  <%= render "index", shops: @shops %>
+  <div class="pagination"><%= paginate @shops %></div>
+</div>
