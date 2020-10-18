@@ -9,9 +9,9 @@
       <span class="ml-5" style="font-size: 18px;">レビューした人：<%= link_to @review.user.name, @review.user %></span>
     
       <!--星評価-->
-       <span class="ml-5" id="star-rate-<%= @review.id %>"></span>
+       <span class="star-rate-<%= @review.id %> ml-5"></span>
         <script>
-        $('#star-rate-<%= @review.id %>').raty({
+        $('.star-rate-<%= @review.id %>').raty({
           size: 36,
           starOff:  '<%= asset_path('star-off.png') %>',
           starOn : '<%= asset_path('star-on.png') %>',

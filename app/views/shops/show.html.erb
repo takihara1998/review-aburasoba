@@ -15,9 +15,9 @@
     </aside>
     <div class="col-sm-7">
       <!--星評価-->
-       <span id="star-rate-<%= review.id %>"></span>
+       <span class="star-rate-<%= review.id %>"></span>
         <script>
-        $('#star-rate-<%= review.id %>').raty({
+        $('.star-rate-<%= review.id %>').raty({
           size: 36,
           starOff:  '<%= asset_path('star-off.png') %>',
           starOn : '<%= asset_path('star-on.png') %>',

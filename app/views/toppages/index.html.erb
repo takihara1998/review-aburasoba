@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<h3 class="text-center mb-5">油そばのレビューサイトです。</h3>  <!--簡単なサービス紹介-->
+<h3 class="text-center mb-5 mt-5">お気に入りのお店を見つけてください！</h3>  <!--簡単なサービス紹介-->
 <!--トップページ上部終わり-->
 
 <!--検索フォームをrender-->
@@ -62,9 +62,9 @@
       <% else %>
         <%= link_to (image_tag "default_user.png", :width => "45", :height => "45"), review.user %><!--初期画像-->
       <% end %>
-      <span class="tp_review_user_name ml-3"><%= link_to review.user.name, review.user %></span>
+      <span class="tp_review_user_name ml-3 mr-5"><%= link_to review.user.name, review.user %></span>
       <!--星評価-->
-       <span class="star-rate-<%= review.id %>", class="ml-5"></span>
+       <span class="star-rate-<%= review.id %>"></span>
         <script>
         $('.star-rate-<%= review.id %>').raty({
           size: 36,
