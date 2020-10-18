@@ -25,9 +25,9 @@
       <p class="tp_popular_shops_name"><%= link_to shop.name, shop %></p>
       <p>住所：<%= shop.address %></p>
       <!--星評価-->
-      <div id="star-rate-<%= shop.id %>"></div>
+      <div class="star-rate-<%= shop.id %>"></div>
       <script>
-      $('#star-rate-<%= shop.id %>').raty({
+      $('.star-rate-<%= shop.id %>').raty({
         size: 36,
         starOff:  '<%= asset_path('star-off.png') %>',
         starOn : '<%= asset_path('star-on.png') %>',
@@ -64,9 +64,9 @@
       <% end %>
       <span class="tp_review_user_name ml-3"><%= link_to review.user.name, review.user %></span>
       <!--星評価-->
-       <span id="star-rate-<%= review.id %>", class="ml-5"></span>
+       <span class="star-rate-<%= review.id %>", class="ml-5"></span>
         <script>
-        $('#star-rate-<%= review.id %>').raty({
+        $('.star-rate-<%= review.id %>').raty({
           size: 36,
           starOff:  '<%= asset_path('star-off.png') %>',
           starOn : '<%= asset_path('star-on.png') %>',
