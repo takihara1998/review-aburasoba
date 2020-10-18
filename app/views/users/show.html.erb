@@ -22,7 +22,10 @@
     <% end %>
   </aside>
   <div class="col-sm-9">
-    <h2><%= @user.name %></h2>
+    <% if current_user == @user %>
+      <h2 class="mt-1 mb-4">マイページ</h2>
+    <% end %>
+    <h2 class="mt-2 mb-4"><%= @user.name %></h2>
     <h4 class="mb-5"><%= @user.introduction %></h4>
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">レビュー一覧  <span class="badge badge-secondary"><%= @count_reviews %></span></a></li>

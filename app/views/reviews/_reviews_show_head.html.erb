@@ -13,6 +13,9 @@
     <%= render "shop_star" %>  
 
     <p class="rs_shop_address"><%= @review.shop.address %></p>
+    <span class="rs_shop_open_hour">営業時間：<%= @shop.open_hour %></span>
+    <span class="rs_shop_holiday">定休日：<%= @shop.holiday %></span>
+    <p class="rs_shop_tel">📞：<%= @shop.tel %></p>
     <% if logged_in? %>
       <%= render 'shop_likes/like_button', shop: @review.shop %>
       <%= link_to "このお店のレビューを書く", @review.shop, class: 'btn btn-info mt-3 mr-5' %>

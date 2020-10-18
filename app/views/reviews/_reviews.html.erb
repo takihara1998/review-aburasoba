@@ -39,10 +39,10 @@
       <% end %>
       <%= link_to review.picture_b.url, 'data-lightbox': review.picture_b do %>
         <%= image_tag(review.picture_b.url, class: "rh_review_picture_ab") if review.picture_b? %>
-      <% end %>
+      <% end %><br/>
     
     <% if logged_in? %>
-      <% if current_user.id == review.user_id %>
+      <% if current_user == review.user %>
         <!--自分のレビューに対してはグッドボタン無効-->
         <p class="mt-2" style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= review.review_likes.count %><p>
       <% else %>

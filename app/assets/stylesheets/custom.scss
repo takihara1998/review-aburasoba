@@ -52,7 +52,7 @@
 }
 
 .tp_review_picture_ab {
-  width: 25%;
+  width: 20%;
   height: 30%;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .rh_review_picture_ab {
-  width: 25%;
+  width: 20%;
   height: 30%;
 }
 
@@ -145,20 +145,34 @@
 }
 
 .ss_review_picture_ab {
-  width: 25%;
+  width: 20%;
   height: 30%;
 }
 
 
 //reviews/show
 .rs_shop_name {
-  font-size: 23px;
+  font-size: 25px;
   margin-right: 30px;
 }
 
 .rs_shop_address {
-  font-size: 16px;
+  font-size: 17px;
   margin: 30px 0 10px 3px;
+}
+
+.rs_shop_open_hour {
+  font-size: 17px;
+  margin: 0 30px 0 3px;
+}
+
+.rs_shop_holiday {
+  font-size: 17px;
+}
+
+.rs_shop_tel {
+  font-size: 17px;
+  margin: 10px 0 10px 3px;
 }
 
 .rs_review_title {
