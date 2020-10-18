@@ -25,9 +25,9 @@
       <p class="tp_popular_shops_name"><%= link_to shop.name, shop %></p>
       <p>住所：<%= shop.address %></p>
       <!--星評価-->
-      <div class="star-rate-<%= shop.id %>"></div>
+      <div id="star-rate-<%= shop.id %>"></div>
       <script>
-      $('.star-rate-<%= shop.id %>').raty({
+      $('#star-rate-<%= shop.id %>').raty({
         size: 36,
         starOff:  '<%= asset_path('star-off.png') %>',
         starOn : '<%= asset_path('star-on.png') %>',
