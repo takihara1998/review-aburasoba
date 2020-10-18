@@ -34,12 +34,12 @@
     <div class="review-content rh_review_content">
       <p><%= review.content %><p>
     </div>
-    <% if review.picture_a? %>
-      <%= image_tag review.picture_a.url, :width => "100", :height => "100" %>
-    <% end %>
-    <% if review.picture_b? %>
-      <%= image_tag review.picture_b.url, :width => "100", :height => "100" %>
-    <% end %>
+    <%= link_to review.picture_a.url, 'data-lightbox': review.picture_a do %>
+        <%= image_tag(review.picture_a.url, class: "rh_review_picture_ab") if review.picture_a? %>
+      <% end %>
+      <%= link_to review.picture_b.url, 'data-lightbox': review.picture_b do %>
+        <%= image_tag(review.picture_b.url, class: "rh_review_picture_ab") if review.picture_b? %>
+      <% end %>
     
     <% if logged_in? %>
       <% if current_user.id == review.user_id %>

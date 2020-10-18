@@ -1,12 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
-
 // トップページ上部の背景画像
 .toppage-top {
   position: relative;
-  
 }
 
 .toppage-image {
@@ -14,7 +11,7 @@
   height: 0;
   /* 表示画像の高さ ÷ 表示画像の幅 × 100 */
   padding-top: 75%;
-  background-image: image-url('toppage1.jpg');
+  background-image: image-url('toppage1.jpg');  //ここの記述によりデプロイ後も写真が表示されるようになった。
   background-size: cover;
 }
 
@@ -52,6 +49,11 @@
 
 .tp_review_content {
   font-size: 18px;
+}
+
+.tp_review_picture_ab {
+  width: 25%;
+  height: 30%;
 }
 
 
@@ -93,6 +95,11 @@
 .rh_review_content {
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+.rh_review_picture_ab {
+  width: 25%;
+  height: 30%;
 }
 
 
@@ -137,6 +144,11 @@
   margin: 10px 0 5px 0;
 }
 
+.ss_review_picture_ab {
+  width: 25%;
+  height: 30%;
+}
+
 
 //reviews/show
 .rs_shop_name {
@@ -159,9 +171,30 @@
   font-size: 18px;
 }
 
-.rs_review_picture_a {
+.rs_review_picture_ab {
   display: inline;
-  margin-right: 20px;
+  width: 45%;
+  height: 45%;
+}
+
+
+// users/:id/likes
+.ul_shop_name {
+  font-size: 23px;
+}
+
+.ul_shop_address {
+  font-size: 17px;
+  margin-top: 5px;
+}
+
+.ul_shop_open_hour {
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+.ul_shop_holiday {
+  font-size: 16px;
 }
 
 

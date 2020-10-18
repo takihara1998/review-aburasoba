@@ -38,11 +38,11 @@
       <div class="review-content ss_review_content">
         <p><%= review.content %></p>
       </div>
-      <% if review.picture_a? %>
-        <%= image_tag review.picture_a.url, :width => "100", :height => "100" %>  <!--もっとみるの中に入れるからいらないかもしれない-->
+      <%= link_to review.picture_a.url, 'data-lightbox': review.picture_a do %>
+        <%= image_tag(review.picture_a.url, class: "ss_review_picture_ab") if review.picture_a? %>
       <% end %>
-      <% if review.picture_b? %>
-        <%= image_tag review.picture_b.url, :width => "100", :height => "100" %>  <!--最初から剥き出しになることはなさそう-->
+      <%= link_to review.picture_b.url, 'data-lightbox': review.picture_b do %>
+        <%= image_tag(review.picture_b.url, class: "ss_review_picture_ab") if review.picture_b? %>
       <% end %><br/>
       
       <% if logged_in? %>

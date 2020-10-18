@@ -1,4 +1,4 @@
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center mt-5 mb-5">
   <div class="col-sm-10">
     <div class="mb-5">
       <% if @review.user.picture? %>
@@ -33,11 +33,11 @@
     <p class="rs_review_title"><%= @review.title %></p>
     <p class="rs_review_content mt-5"><%= @review.content %></p>
     <div class="mt-5">
-      <% if @review.picture_a? %>
-        <p class="rs_review_picture_a"><%= image_tag @review.picture_a.url, :width => "150", :height => "150" %></p>
+      <%= link_to @review.picture_a.url, 'data-lightbox': @review.picture_a do %>
+        <%= image_tag(@review.picture_a.url, class: "rs_review_picture_ab") if @review.picture_a? %>
       <% end %>
-      <% if @review.picture_b? %>
-        <%= image_tag @review.picture_b.url, :width => "150", :height => "150" %>
+      <%= link_to @review.picture_b.url, 'data-lightbox': @review.picture_b do %>
+        <%= image_tag(@review.picture_b.url, class: "rs_review_picture_ab") if @review.picture_b? %>
       <% end %>
     </div>
     <% if logged_in? %>
@@ -47,9 +47,9 @@
           <%= link_to "削除", @review, method: :delete, data: { confirm: "削除しますか？" } %>  <!--本当に消すのか確認する-->
         </div>
         <!--自分のレビューに対してはグッドボタン無効-->
-        <p class="mt-2" style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= @review.review_likes.count %><p>
+        <p class="mt-2 mb-5" style="color: black;"><i class="far fa-thumbs-up ml-2 mt-3 mb-1"></i> <%= @review.review_likes.count %><p>
       <% else %>
-        <p class="mt-2"><%= render 'review_likes/good_button', review: @review %></p>
+        <p class="mt-2 mb-5"><%= render 'review_likes/good_button', review: @review %></p>
       <% end %>
     <% else %>
       <%= link_to login_path do %>
