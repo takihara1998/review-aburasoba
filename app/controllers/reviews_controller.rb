@@ -36,9 +36,10 @@ class ReviewsController < ApplicationController
   
   def destroy
     @review = Review.find(params[:id])
+    @shop = @review.shop
     if @review.destroy
       flash[:success] = "レビューを削除しました。"
-      redirect_to root_url  #要検討
+      redirect_to @shop  #要検討
     end
   end
   

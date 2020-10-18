@@ -88,27 +88,27 @@
         <p><%= review.content %></p>
       </div>
       <div class="mt-3">
-      <%= link_to review.picture_a.url, 'data-lightbox': review.picture_a do %>
-        <%= image_tag(review.picture_a.url, class: "tp_review_picture_ab") if review.picture_a? %>
-      <% end %>
-      <%= link_to review.picture_b.url, 'data-lightbox': review.picture_b do %>
-        <%= image_tag(review.picture_b.url, class: "tp_review_picture_ab") if review.picture_b? %>
-      <% end %><br/>
+        <%= link_to review.picture_a.url, 'data-lightbox': review.picture_a do %>
+          <%= image_tag(review.picture_a.url, class: "tp_review_picture_ab") if review.picture_a? %>
+        <% end %>
+        <%= link_to review.picture_b.url, 'data-lightbox': review.picture_b do %>
+          <%= image_tag(review.picture_b.url, class: "tp_review_picture_ab") if review.picture_b? %>
+        <% end %><br/>
+        <p class="text-right"><%= link_to "レビュー詳細へ", review %></p>
       </div>
       <% if logged_in? %>
         <% if current_user.id == review.user_id %>
           <!--自分のレビューに対してはグッドボタン無効-->
-          <p style="color: black;"><i class="far fa-thumbs-up ml-2 mt-4 mb-1"></i> <%= review.review_likes.count %><p>
+          <p style="color: black;"><i class="far fa-thumbs-up ml-2 mb-1"></i> <%= review.review_likes.count %><p>
         <% else %>
-          <p class="mt-4"><%= render "review_likes/good_button", review: review %></p>
+          <p class="mt-0 mb-5"><%= render "review_likes/good_button", review: review %></p>
         <% end %>
       <% else %>
         <%= link_to login_path do %> 
-          <span style="color: black;"><i class="far fa-thumbs-up mt-3 mb-1"></i> <%= review.review_likes.count %></span><br/>
+          <span style="color: black;"><i class="far fa-thumbs-up mb-1"></i> <%= review.review_likes.count %></span><br/>
         <% end %>
-        <span class="text-muted">※グッドボタンを押すにはログインが必要です</span>
+        <p class="text-muted">※グッドボタンを押すにはログインが必要です</p>
       <% end %>
-      <p class="text-right"><%= link_to "レビュー詳細へ", review %></p>
     </div>
   <% end %>
 </div>
